@@ -1,0 +1,62 @@
+<h3>ルーム予約</h3>
+<h3>この部屋を予約しようとしているユーザー</h3>
+<table>
+  <tr>
+    <th>ID</th>
+    <td>
+      <%= @current_user.id %>
+    </td>
+  </tr>
+  <tr>
+    <th>名前</th>
+    <td>
+      <%= @current_user.user_name %>
+    </td>
+  </tr>
+</table>
+<%= form_with url: confirm_reservation_path do |f| %>
+  <table>
+    <tr>
+      <th>
+        <%= f.label :user_id ,"投稿者ID" %>
+      </th>
+      <td>
+        <%= @room.user_id %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <%= f.label :room_name ,"ルームネーム" %>
+      </th>
+      <td>
+        <%= f.text_field :room_name, value: @room.room_name, readonly: true %>
+          <!-- ビューに表示されるが編集不可 -->
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <%= f.label :charge ,"料金" %>
+      </th>
+      <td>
+        <%= f.number_field :charge, value: @room.charge, readonly: true %>
+          <!-- ビューに表示されるが編集不可 -->
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <%= f.label :people ,"人数" %>
+      </th>
+      <td>
+        <%= f.number_field :people %>
+      </td>
+    </tr>
+  </table>
+      <%= f.submit "確認画面へ" %>
+      <%= f.hidden_field :current_user_id, value: @current_user.id %>
+<% end %>
+
+          <ul>
+            <li>
+              <%= link_to "ユーザー情報一覧に戻る" , :users %>
+            </li>
+          </ul>
