@@ -59,3 +59,6 @@ gem 'pry-rails'
 
 gem 'net-smtp', '~> 0.2.1'
 
+gem 'carrierwave', '~> 2.0'
+
+gem 'mini_magick'

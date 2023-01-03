@@ -54,6 +54,7 @@
   <thead>
     <tr>
       <th>id</th>
+      <th>ルーム画像</th>
       <th>ルームネーム</th>
       <th>場所</th>
       <th>ルーム紹介</th>
@@ -70,6 +71,11 @@
           <%= r.id %>
         </td>
         <td>
+        <% if r.avatar? %>
+          <%= image_tag r.avatar.url,class: "room_image" %>
+            <% end %>
+        </td>
+        <td>
           <%= r.room_name %>
         </td>
         <td>
@@ -79,7 +85,7 @@
           <%= r.room_introduction %>
         </td>
         <td>
-          <%= r.charge %>
+          <%= r.charge %>円/日
         </td>
         <td>
           <%= r.user_id %>
@@ -97,7 +103,9 @@
   <thead>
     <tr>
       <th>ID</th>
+      <th>ルーム画像</th>
       <th>ルームネーム</th>
+      <th>ルームID</th>
       <th>料金/日</th>
       <th>開始日</th>
       <th>終了日</th>
@@ -112,7 +120,15 @@
     <% @reservations.each do |r| %>
       <tr>
         <td>
-          <%= r.id %>
+          <%= link_to r.id, user_to_all_rooms_users_path(r.user_id) %>
+        </td>
+        <td>
+          <% if r.avatar? %>
+            <%= image_tag r.avatar, class: "room_image" %>
+          <% end %>
+        </td>
+        <td>
+          <%= r.room_id %>
         </td>
         <td>
           <%= r.room_name %>

@@ -2,6 +2,14 @@
 <h3>この部屋を予約しようとしているユーザー</h3>
 <table>
   <tr>
+    <th>ルーム画像:</th>
+    <td>
+      <% if @reservation.avatar? %>
+        <%= image_tag @reservation.avatar, class: "room_image" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
     <th>予約者ID:</th>
     <td>
       <%= @current_user.id %>
@@ -62,8 +70,10 @@
     <%= f.hidden_field :start_date, :value=> params[:start_date] %>
     <%= f.hidden_field :end_date, :value=> params[:end_date] %>
     <%= f.hidden_field :people, :value=> params[:people] %>
+    <%= f.hidden_field :avatar, :value=> @room.avatar %>
 
-    <%= f.submit "修正する" , name: :back %>
     <%= f.submit "確定する" %>
-
-  <% end %>
+    <% end %>
+    <%= link_to :back do %>
+      <button>ルーム詳細に戻る</button>
+    <% end %><!-- renderで作ろうとすると激ムズだったため -->

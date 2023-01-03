@@ -43,10 +43,21 @@
     </tr>
     <tr>
       <th>
+        <%= f.label :user_name ,"ルーム画像" %>
+      </th>
+      <td>
+        <% if @room.avatar? %>
+          <%= image_tag @room.avatar.url,class: "room_image" %>
+            <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <th>
         <%= f.label :room_name ,"ルームネーム" %>
       </th>
       <td>
-        <%= f.text_field :room_name, value: @room.room_name, readonly: true %>
+        <%=  @room.room_name %>
           <!-- ビューに表示されるが編集不可 -->
       </td>
     </tr>
@@ -55,7 +66,7 @@
         <%= f.label :charge ,"料金" %>
       </th>
       <td>
-        <%= f.number_field :charge, value: @room.charge, readonly: true %>
+        <%= @room.charge %>
           <!-- ビューに表示されるが編集不可 -->
       </td>
     </tr>
@@ -86,6 +97,10 @@
   </table>
       <%= f.submit "確認画面へ" %>
       <%= f.hidden_field :current_user_id, value: @current_user.id %>
+      <%= f.hidden_field :charge, value: @room.charge %>
+      <%= f.hidden_field :room_name, value: @room.room_name %>
+      <%= f.hidden_field :avatar, value: @room.avatar
+  %>
 <% end %>
 
           <ul>
