@@ -12,6 +12,22 @@
       </tr>
       <tr>
         <th>
+          <%= r.label :address ,"場所" %>
+        </th>
+        <td>
+          <%= r.text_field :address %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <%= r.label :room_introduction ,"ルーム紹介" %>
+        </th>
+        <td>
+          <%= r.text_field :room_introduction %>
+        </td>
+      </tr>
+      <tr>
+        <th>
           <%= r.label :charge ,"料金/日" %>
         </th>
         <td>
@@ -19,7 +35,6 @@
         </td>
       </tr>
     </table>
-    <%= @user.id %>
       <%= r.hidden_field :user_id, value: @user.id %>
         <%= r.submit "登録完了する" %>
           <% end %>

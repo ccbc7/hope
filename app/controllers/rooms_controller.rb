@@ -22,9 +22,10 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @reservations = Reservation.new
+    @reservation = Reservation.new
     @room = Room.find(params[:id])
-    @current_user = User.find(params[:format])
+    @user = User.find(@room.user_id)#ルーム登録時に紐づけた登録者のuser_idからユーザー名を検索
+    @current_user = User.find(params[:format])#ログイン中ユーザー取得
   end
 
   def edit
@@ -42,6 +43,6 @@ class RoomsController < ApplicationController
 
   private
   def room_params
-    params.require(:room).permit(:room_name, :charge, :user_id)
+    params.require(:room).permit(:room_name, :charge, :user_id, :address, :room_introduction, )
   end
 end

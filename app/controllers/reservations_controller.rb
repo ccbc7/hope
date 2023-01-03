@@ -29,13 +29,18 @@ class ReservationsController < ApplicationController
   end
 
   def confirm
-    @reservation = Reservation.new
+    # binding.pry
+    @reservation = Reservation.new(confirm_params)
     @current_user = User.find(params[:current_user_id])
     @room = Room.find(params[:id])
   end
 
   private
+
+  def confirm_params
+  params.permit(:user_id, :room_id, :room_name, :charge, :start_date, :end_date, :people)#時間の計算をするために必要
+  end
   def reservation_params
-  params.require(:reservation).permit(:user_id,:room_id, :room_name, :charge, :people)
+  params.require(:reservation).permit(:user_id, :room_id, :room_name, :charge, :start_date, :end_date, :people)
   end
 end

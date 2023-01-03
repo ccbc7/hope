@@ -26,6 +26,18 @@
     </td>
   </tr>
   <tr>
+    <th>開始日:</th>
+    <td>
+      <%= params[:start_date] %>
+    </td>
+  </tr>
+  <tr>
+    <th>終了日:</th>
+    <td>
+      <%= params[:end_date] %>
+    </td>
+  </tr>
+  <tr>
     <th>人数:</th>
     <td>
       <%= params[:people] %>人
@@ -34,8 +46,10 @@
   <tr>
     <th>合計料金:</th>
     <td>
-      <% sub_price=(@room.charge) * params[:people].to_i %>
-        <%= sub_price.floor %>円
+      <% sub_price = @reservation.charge * @reservation.people %>
+      <% total_day = ((@reservation.end_date - @reservation.start_date)/3600/24+1).floor %>
+        <% total_price = sub_price * total_day %>
+        <%= total_price %>円
     </td>
   </tr>
 </table>
@@ -45,6 +59,8 @@
     <%= f.hidden_field :room_id, :value=> @room.id %>
     <%= f.hidden_field :room_name, :value=> @room.room_name %>
     <%= f.hidden_field :charge, :value=> @room.charge %>
+    <%= f.hidden_field :start_date, :value=> params[:start_date] %>
+    <%= f.hidden_field :end_date, :value=> params[:end_date] %>
     <%= f.hidden_field :people, :value=> params[:people] %>
 
     <%= f.submit "修正する" , name: :back %>

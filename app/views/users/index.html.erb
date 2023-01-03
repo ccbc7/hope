@@ -55,6 +55,8 @@
     <tr>
       <th>id</th>
       <th>ルームネーム</th>
+      <th>場所</th>
+      <th>ルーム紹介</th>
       <th>料金</th>
       <th>登録者ID</th>
       <th>削除</th>
@@ -69,6 +71,12 @@
         </td>
         <td>
           <%= r.room_name %>
+        </td>
+        <td>
+          <%= r.address %>
+        </td>
+        <td>
+          <%= r.room_introduction %>
         </td>
         <td>
           <%= r.charge %>
@@ -90,7 +98,11 @@
     <tr>
       <th>ID</th>
       <th>ルームネーム</th>
-      <th>料金</th>
+      <th>料金/日</th>
+      <th>開始日</th>
+      <th>終了日</th>
+      <th>人数</th>
+      <th>合計料金</th>
       <th>予約者ID</th>
       <th>削除</th>
     </tr>
@@ -107,6 +119,21 @@
         </td>
         <td>
           <%= r.charge %>
+        </td>
+        <td>
+          <%= r.start_date.to_s(:datetime_jp) %>
+        </td>
+        <td>
+          <%= r.end_date.to_s(:datetime_jp) %>
+        </td>
+        <td>
+          <%= r.people %>
+        </td>
+        <td>
+          <% sub_price = r.charge * r.people %>
+            <% total_day=((r.end_date - r.start_date)/3600/24+1).floor %>
+              <% total_price=sub_price * total_day %>
+                <%= total_price %>円
         </td>
         <td>
           <%= r.user_id %>
